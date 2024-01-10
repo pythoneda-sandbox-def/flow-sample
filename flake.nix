@@ -61,7 +61,7 @@
         nixpkgsRelease =
           builtins.replaceStrings [ "\n" ] [ "" ] "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
-        pythoneda-sandbox-python-for =
+        pythoneda-sandbox-flow-sample-for =
           { python, pythoneda-shared-pythoneda-domain }:
           let
             pnameWithUnderscores =
@@ -128,15 +128,16 @@
       in rec {
         defaultPackage = packages.default;
         devShells = rec {
-          default = pythoneda-sandbox-python-default;
-          pythoneda-sandbox-python-default = pythoneda-sandbox-python-python311;
-          pythoneda-sandbox-python-python38 = shared.devShell-for {
+          default = pythoneda-sandbox-flow-sample-default;
+          pythoneda-sandbox-flow-sample-default =
+            pythoneda-sandbox-flow-sample-python311;
+          pythoneda-sandbox-flow-sample-python38 = shared.devShell-for {
             banner = "${
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python38
               }/bin/banner.sh";
             extra-namespaces = "";
             nixpkgs-release = nixpkgsRelease;
-            package = packages.pythoneda-sandbox-python-python38;
+            package = packages.pythoneda-sandbox-flow-sample-python38;
             python = pkgs.python38;
             pythoneda-shared-pythoneda-banner =
               pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python38;
@@ -144,13 +145,13 @@
               pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
             inherit archRole layer org pkgs repo space;
           };
-          pythoneda-sandbox-python-python39 = shared.devShell-for {
+          pythoneda-sandbox-flow-sample-python39 = shared.devShell-for {
             banner = "${
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python39
               }/bin/banner.sh";
             extra-namespaces = "";
             nixpkgs-release = nixpkgsRelease;
-            package = packages.pythoneda-sandbox-python-python39;
+            package = packages.pythoneda-sandbox-flow-sample-python39;
             python = pkgs.python39;
             pythoneda-shared-pythoneda-banner =
               pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python39;
@@ -158,13 +159,13 @@
               pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
             inherit archRole layer org pkgs repo space;
           };
-          pythoneda-sandbox-python-python310 = shared.devShell-for {
+          pythoneda-sandbox-flow-sample-python310 = shared.devShell-for {
             banner = "${
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python310
               }/bin/banner.sh";
             extra-namespaces = "";
             nixpkgs-release = nixpkgsRelease;
-            package = packages.pythoneda-sandbox-python-python310;
+            package = packages.pythoneda-sandbox-flow-sample-python310;
             python = pkgs.python310;
             pythoneda-shared-pythoneda-banner =
               pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python310;
@@ -172,13 +173,13 @@
               pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
             inherit archRole layer org pkgs repo space;
           };
-          pythoneda-sandbox-python-python311 = shared.devShell-for {
+          pythoneda-sandbox-flow-sample-python311 = shared.devShell-for {
             banner = "${
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python311
               }/bin/banner.sh";
             extra-namespaces = "";
             nixpkgs-release = nixpkgsRelease;
-            package = packages.pythoneda-sandbox-python-python311;
+            package = packages.pythoneda-sandbox-flow-sample-python311;
             python = pkgs.python311;
             pythoneda-shared-pythoneda-banner =
               pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python311;
@@ -188,28 +189,33 @@
           };
         };
         packages = rec {
-          default = pythoneda-sandbox-python-default;
-          pythoneda-sandbox-python-default = pythoneda-sandbox-python-python311;
-          pythoneda-sandbox-python-python38 = pythoneda-sandbox-python-for {
-            python = pkgs.python38;
-            pythoneda-shared-pythoneda-domain =
-              pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
-          };
-          pythoneda-sandbox-python-python39 = pythoneda-sandbox-python-for {
-            python = pkgs.python39;
-            pythoneda-shared-pythoneda-domain =
-              pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
-          };
-          pythoneda-sandbox-python-python310 = pythoneda-sandbox-python-for {
-            python = pkgs.python310;
-            pythoneda-shared-pythoneda-domain =
-              pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
-          };
-          pythoneda-sandbox-python-python311 = pythoneda-sandbox-python-for {
-            python = pkgs.python311;
-            pythoneda-shared-pythoneda-domain =
-              pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python311;
-          };
+          default = pythoneda-sandbox-flow-sample-default;
+          pythoneda-sandbox-flow-sample-default =
+            pythoneda-sandbox-flow-sample-python311;
+          pythoneda-sandbox-flow-sample-python38 =
+            pythoneda-sandbox-flow-sample-for {
+              python = pkgs.python38;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
+            };
+          pythoneda-sandbox-flow-sample-python39 =
+            pythoneda-sandbox-flow-sample-for {
+              python = pkgs.python39;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
+            };
+          pythoneda-sandbox-flow-sample-python310 =
+            pythoneda-sandbox-flow-sample-for {
+              python = pkgs.python310;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
+            };
+          pythoneda-sandbox-flow-sample-python311 =
+            pythoneda-sandbox-flow-sample-for {
+              python = pkgs.python311;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python311;
+            };
         };
       });
 }
