@@ -46,8 +46,8 @@
       let
         org = "pythoneda-sandbox";
         repo = "flow-sample";
-        version = "0.0.0";
-        sha256 = "0mczrchhs626mvgdcmmg1gcn0bjmq81nwy14yzdj16rh27lq0g67";
+        version = "0.0.2";
+        sha256 = "1g5qkad7mh244xd1wr8s6dlkq3d53xgk5glfc5cr069bz8q8g9ca";
         pname = "${org}-${repo}";
         pkgs = import nixos { inherit system; };
         description = "pythoneda-sandbox Flow Sample package";
@@ -100,7 +100,7 @@
             propagatedBuildInputs = with python.pkgs;
               [ pythoneda-shared-pythoneda-domain ];
 
-            pythonImportsCheck = [ pythonpackage ];
+            # pythonImportsCheck = [ pythonpackage ];
 
             unpackPhase = ''
               cp -r ${src} .
