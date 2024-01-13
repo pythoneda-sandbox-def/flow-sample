@@ -24,14 +24,23 @@
     pythoneda-shared-pythoneda-banner = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
-      url = "github:pythoneda-shared-pythoneda-def/banner/0.0.40";
+      url = "github:pythoneda-shared-pythoneda-def/banner/0.0.41";
+    };
+    pythoneda-shared-pythoneda-application = {
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixos.follows = "nixos";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+      url = "github:pythoneda-shared-pythoneda-def/application/0.0.36";
     };
     pythoneda-shared-pythoneda-domain = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
       inputs.pythoneda-shared-pythoneda-banner.follows =
         "pythoneda-shared-pythoneda-banner";
-      url = "github:pythoneda-shared-pythoneda-def/domain/0.0.19";
+      url = "github:pythoneda-shared-pythoneda-def/domain/0.0.22";
     };
   };
   outputs = inputs:
@@ -61,8 +70,9 @@
         nixpkgsRelease =
           builtins.replaceStrings [ "\n" ] [ "" ] "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
-        pythoneda-sandbox-flow-sample-for =
-          { python, pythoneda-shared-pythoneda-domain }:
+        pythoneda-sandbox-flow-sample-for = { python
+          , pythoneda-shared-pythoneda-application
+          , pythoneda-shared-pythoneda-domain }:
           let
             pnameWithUnderscores =
               builtins.replaceStrings [ "-" ] [ "_" ] pname;
@@ -84,6 +94,8 @@
               inherit homepage pname pythonMajorMinorVersion pythonpackage
                 version;
               package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
+              pythonedaSharedPythonedaApplication =
+                pythoneda-shared-pythoneda-application.version;
               pythonedaSharedPythonedaDomain =
                 pythoneda-shared-pythoneda-domain.version;
               src = pyprojectTemplateFile;
@@ -97,8 +109,10 @@
             format = "pyproject";
 
             nativeBuildInputs = with python.pkgs; [ pip poetry-core ];
-            propagatedBuildInputs = with python.pkgs;
-              [ pythoneda-shared-pythoneda-domain ];
+            propagatedBuildInputs = with python.pkgs; [
+              pythoneda-shared-pythoneda-application
+              pythoneda-shared-pythoneda-domain
+            ];
 
             # pythonImportsCheck = [ pythonpackage ];
 
@@ -195,24 +209,32 @@
           pythoneda-sandbox-flow-sample-python38 =
             pythoneda-sandbox-flow-sample-for {
               python = pkgs.python38;
+              pythoneda-shared-pythoneda-application =
+                pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python38;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
             };
           pythoneda-sandbox-flow-sample-python39 =
             pythoneda-sandbox-flow-sample-for {
               python = pkgs.python39;
+              pythoneda-shared-pythoneda-application =
+                pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python39;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
             };
           pythoneda-sandbox-flow-sample-python310 =
             pythoneda-sandbox-flow-sample-for {
               python = pkgs.python310;
+              pythoneda-shared-pythoneda-application =
+                pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python310;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
             };
           pythoneda-sandbox-flow-sample-python311 =
             pythoneda-sandbox-flow-sample-for {
               python = pkgs.python311;
+              pythoneda-shared-pythoneda-application =
+                pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python311;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python311;
             };
