@@ -24,7 +24,7 @@
     pythoneda-shared-banner = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
-      url = "github:pythoneda-shared-def/banner/0.0.43";
+      url = "github:pythoneda-shared-def/banner/0.0.46";
     };
     pythoneda-shared-application = {
       inputs.flake-utils.follows = "flake-utils";
@@ -33,14 +33,14 @@
         "pythoneda-shared-banner";
       inputs.pythoneda-shared-domain.follows =
         "pythoneda-shared-domain";
-      url = "github:pythoneda-shared-def/application/0.0.40";
+      url = "github:pythoneda-shared-def/application/0.0.42";
     };
     pythoneda-shared-domain = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
       inputs.pythoneda-shared-banner.follows =
         "pythoneda-shared-banner";
-      url = "github:pythoneda-shared-def/domain/0.0.25";
+      url = "github:pythoneda-shared-def/domain/0.0.26";
     };
   };
   outputs = inputs:
@@ -55,8 +55,8 @@
       let
         org = "pythoneda-sandbox";
         repo = "flow-sample";
-        version = "0.0.3";
-        sha256 = "1ziind26ln0q5yammjahdjaq0ic6z77xljfqdwglwqmj5x1cfvbv";
+        version = "0.0.4";
+        sha256 = "15qlifvgha01swm7xl216b7vsxypshazmzylwr3lf5wcllidwcvy";
         pname = "${org}-${repo}";
         pkgs = import nixos { inherit system; };
         description = "pythoneda-sandbox Flow Sample package";
