@@ -28,19 +28,19 @@
         "pythoneda-shared-pythonlang-banner";
       inputs.pythoneda-shared-pythonlang-domain.follows =
         "pythoneda-shared-pythonlang-domain";
-      url = "github:pythoneda-shared-pythonlang-def/application/0.0.95";
+      url = "github:pythoneda-shared-pythonlang-def/application/0.0.99";
     };
     pythoneda-shared-pythonlang-banner = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:pythoneda-shared-pythonlang-def/banner/0.0.72";
+      url = "github:pythoneda-shared-pythonlang-def/banner/0.0.74";
     };
     pythoneda-shared-pythonlang-domain = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.94";
+      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.102";
     };
   };
   outputs = inputs:
@@ -60,6 +60,8 @@
         pname = "${org}-${repo}";
         pkgs = import nixpkgs { inherit system; };
         description = "pythoneda-sandbox Flow Sample package";
+        pythonpackage = "pythoneda.sandbox.flows.sample";
+        package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
         license = pkgs.lib.licenses.gpl3;
         homepage = "https://github.com/pythoneda-sandbox/flow-sample";
         maintainers = [ "rydnr <github@acm-sl.org>" ];
@@ -76,7 +78,6 @@
           let
             pnameWithUnderscores =
               builtins.replaceStrings [ "-" ] [ "_" ] pname;
-            pythonpackage = "pythoneda.sandbox.flows.sample";
             pythonVersionParts = builtins.splitVersion python.version;
             pythonMajorVersion = builtins.head pythonVersionParts;
             pythonMajorMinorVersion =
@@ -93,7 +94,6 @@
               desc = description;
               inherit homepage pname pythonMajorMinorVersion package
                 version;
-              package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
               pythonedaSharedPythonlangApplication =
                 pythoneda-shared-pythonlang-application.version;
               pythonedaSharedPythonlangDomain =
