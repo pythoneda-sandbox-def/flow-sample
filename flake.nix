@@ -28,7 +28,7 @@
         "pythoneda-shared-pythonlang-banner";
       inputs.pythoneda-shared-pythonlang-domain.follows =
         "pythoneda-shared-pythonlang-domain";
-      url = "github:pythoneda-shared-pythonlang-def/application/0.0.104";
+      url = "github:pythoneda-shared-pythonlang-def/application/0.0.105";
     };
     pythoneda-shared-pythonlang-banner = {
       inputs.flake-utils.follows = "flake-utils";
@@ -40,7 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.108";
+      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.109";
     };
   };
   outputs = inputs:
@@ -55,8 +55,8 @@
       let
         org = "pythoneda-sandbox";
         repo = "flow-sample";
-        version = "0.0.5";
-        sha256 = "1m6q8la29zm6vdvy6awd2qa070c2483f5k1iravagbg1ihh0npbd";
+        version = "0.0.6";
+        sha256 = "1qi3qxgblfzi5ljzm8mp8mm06dm4bqxwnprjka44vckis86jnxxw";
         pname = "${org}-${repo}";
         pkgs = import nixpkgs { inherit system; };
         description = "pythoneda-sandbox Flow Sample package";
